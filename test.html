@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nawfal Yasir likes Haadiya Aftab</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Playfair Display', serif;
+    background-color: #cad2c5;
+    margin: 0;
+    padding: 0;
+    opacity: 1; /* Ensure the content is initially visible */
+    transition: opacity 1s ease; /* Apply transition for opacity */
+  }
+  .container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #354f52; /* Set color for main title text */
+  }
+  .photos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row; /* Set back to row layout */
+    margin-top: 20px;
+  }
+  img {
+    width: 400px; /* Set larger width for both images */
+    height: 400px; /* Set larger height for both images */
+    margin: 0 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease; /* Smooth transition for scale */
+    cursor: pointer; /* Change cursor to pointer */
+  }
+  img:hover {
+    transform: scale(1.05); /* Scale up the image on hover */
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black overlay */
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px); /* Apply blur effect to the background */
+  }
+  .enlarged-image {
+    max-width: 70%; /* Increase max-width for the enlarged image */
+    max-height: 70%; /* Increase max-height for the enlarged image */
+  }
+  .caption {
+    font-family: 'Playfair Display', serif; /* Use the same font as the title */
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    margin-top: 10px; /* Add margin-top to separate caption from the photo */
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Nawfal Yasir likes Haadiya Aftab</h1>
+</div>
+<div class="photos-container">
+  <img class="photo" src="C:\Users\ZainL\OneDrive\Desktop\test\MicrosoftTeams-image.png" alt="Placeholder Image 1">
+  <img class="photo" src="C:\Users\ZainL\OneDrive\Desktop\test\380636184053201.webp" alt="Placeholder Image 2">
+</div>
+<div class="overlay">
+  <img class="enlarged-image" src="" alt="Enlarged Image">
+  <p class="caption"></p> <!-- Caption for the photo -->
+</div>
+<script>
+  // Function to handle click on photo
+  function handlePhotoClick(event) {
+    var overlay = document.querySelector('.overlay');
+    var enlargedImage = document.querySelector('.enlarged-image');
+    var caption = document.querySelector('.caption');
+    
+    // Display overlay
+    overlay.style.display = 'flex';
+    
+    // Set clicked photo as enlarged image
+    enlargedImage.src = event.target.src;
+    
+    // Clear caption content
+    caption.textContent = '';
+  }
+  
+  // Function to handle click on overlay (to minimize image)
+  function handleOverlayClick() {
+    var overlay = document.querySelector('.overlay');
+    overlay.style.display = 'none'; // Hide overlay
+  }
+  
+  // Add click event listeners to all photos
+  var photos = document.querySelectorAll('.photo');
+  photos.forEach(function(photo) {
+    photo.addEventListener('click', handlePhotoClick);
+  });
+  
+  // Add click event listener to overlay
+  var overlay = document.querySelector('.overlay');
+  overlay.addEventListener('click', handleOverlayClick);
+</script>
+</body>
+</html>
