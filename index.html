@@ -126,6 +126,36 @@
   </div>
 
   <div class="content-container" style="display: none;">
+    <!-- Content here -->
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+  <script>
+    var passwordInput = document.querySelector('.password-input');
+    var passwordButton = document.querySelector('.password-button');
+    var contentContainer = document.querySelector('.content-container');
+
+    var hashedPassword = "4ef42e3e739ecf5267802489f463caea6e774794b1b5e32c16f13f3f08fd7d17"; // SHA-256 hash of "subscribetomoltenmagma"
+
+    passwordButton.addEventListener('click', function() {
+      var userInput = passwordInput.value;
+      var hashedInput = sha256(userInput);
+
+      if (hashedInput === hashedPassword) {
+        contentContainer.style.display = 'block';
+        document.querySelector('.password-container').style.display = 'none';
+      } else {
+        alert('Incorrect password. Please try again.');
+      }
+    });
+
+    function sha256(input) {
+      var hashed = CryptoJS.SHA256(input);
+      return hashed.toString(CryptoJS.enc.Hex);
+    }
+  </script>
+
+  <div class="content-container" style="display: none;">
     <div class="container">
       <h1>Nawfal Fan Page</h1>
       <p class="subtitle">Moey Krakxen Nofal Yasr Fans Only</p>
@@ -149,23 +179,7 @@
       <p class="caption"></p>
     </div>
   </div>
-
   <script>
-    var passwordInput = document.querySelector('.password-input');
-    var passwordButton = document.querySelector('.password-button');
-    var contentContainer = document.querySelector('.content-container');
-
-    var password = atob('c3Vic2NyaWJldG9mYWRlZGR1c3Q=');
-
-    passwordButton.addEventListener('click', function() {
-      if (passwordInput.value === password) {
-        contentContainer.style.display = 'block';
-        document.querySelector('.password-container').style.display = 'none';
-      } else {
-        alert('Incorrect password. Please try again.');
-      }
-    });
-
     function handlePhotoClick(event) {
       var overlay = document.querySelector('.overlay');
       var enlargedImage = document.querySelector('.enlarged-image');
