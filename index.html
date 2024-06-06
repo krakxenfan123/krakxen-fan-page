@@ -207,6 +207,11 @@
     
     var overlay = document.querySelector('.overlay');
     overlay.addEventListener('click', handleOverlayClick);
+    
+    var key = CryptoJS.lib.WordArray.random(16);
+console.log('Key:', key);
+
+    console.log('Password:', password);
   </script>
 </body>
 </html>
