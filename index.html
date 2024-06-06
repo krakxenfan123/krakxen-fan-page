@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
     body {
       font-family: 'Raleway', sans-serif;
@@ -155,16 +156,34 @@
     var passwordButton = document.querySelector('.password-button');
     var contentContainer = document.querySelector('.content-container');
 
-    var password = atob('c3Vic2NyaWJldG9mYWRlZGR1c3Q=');
+    // Obfuscated password
+    var obfuscatedPassword = obfuscate('subscribetoaddedfast');
 
     passwordButton.addEventListener('click', function() {
-      if (passwordInput.value === password) {
+      var enteredPassword = passwordInput.value;
+      var decryptedPassword = deobfuscate(obfuscatedPassword);
+
+      if (enteredPassword === decryptedPassword) {
         contentContainer.style.display = 'block';
         document.querySelector('.password-container').style.display = 'none';
       } else {
         alert('Incorrect password. Please try again.');
       }
     });
+
+    // Obfuscation function
+    function obfuscate(password) {
+      var key = CryptoJS.lib.WordArray.random(16);
+      var encrypted = CryptoJS.AES.encrypt(password, key).toString();
+      return encrypted;
+    }
+
+    // Deobfuscation function
+    function deobfuscate(obfuscatedPassword) {
+      var key = CryptoJS.lib.WordArray.random(16);
+      var decrypted = CryptoJS.AES.decrypt(obfuscatedPassword, key).toString(CryptoJS.enc.Utf8);
+      return decrypted;
+    }
 
     function handlePhotoClick(event) {
       var overlay = document.querySelector('.overlay');
